@@ -18,6 +18,7 @@
             $this->nomeProduto  = $nomeProduto;
             $this->precoProduto = $precoProduto;
         }
+
         // Getters
         public function getIdProduto() 
         {
@@ -31,6 +32,8 @@
         {
             return $this->precoProduto;
         }
+
+        
         // Setters
         public function setIdProduto(int $id): void 
         {
