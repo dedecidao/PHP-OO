@@ -2,42 +2,101 @@
 
 namespace Dede\Comercial\Dominio\Modelo;
 
+require_once './autoload.php';
+
+use DateTimeInterface;
 
 
-class Pessoa
+abstract class Pessoa
 {
-    private $nome;
-    private $idade;
+    use AcessoAtributos;
+    protected $id;
+    protected $nome;
+    protected $dataNascimento; // (Type datetimeInterface)
+    protected $endereco; //Associacao / Agregacao da Classe Pessoa com Endereco
+    protected $desconto;
+    private static $numDePessoas = 0;
 
-    public function __construct($nome,$idade)
+
+
+
+    public function __construct($id, $nome, $dataNascimento, $endereco)
     {
+        $this->id = $id;
         $this->nome = $nome;
-        $this->idade = $idade;
-        $this->validaIdade($idade);
+        $this->dataNascimento = $dataNascimento;
+        $this->endereco = $endereco;
+
+        //$this->setDesconto(); // Definindo o desconto
+        self::$numDePessoas++;
+       
     }
-    public function getNome(){
-        return $this->nome;
+
+    public function __destruct()
+    {
+        self::$numDePessoas--;
     }
     
-    public function getIdade(){
-        return $this->idade;
+    public function getId()
+    {
+        return $this->id;
     }
 
-    //sets
+    public function getNome()
+    {
+        return $this->nome;
+    }
 
-    public function setNome($nome){
+    public function getDataNascimento()
+    {
+        return $this->dataNascimento;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setNome($nome)
+    {
         $this->nome = $nome;
     }
-    public function setIdade($idade){
-        $this->idade = $idade;
+
+    public function setDataNascimento(DateTimeInterface $dataNascimento)
+    {
+        $this->dataNascimento = $dataNascimento;
     }
 
-    public function validaIdade($idade){
-        if ($this->idade >= 0 && $this->idade <120) {
-            $this->idade = $idade;
-        } else {
-            return "Idade nao valida";
-            exit();
-        }
+    public static function getNumDePessoas()
+    {
+        return self::$numDePessoas;
     }
+
+
+    public function idade(): int
+    {
+        return $this->getDataNascimento()
+            ->diff(new \DateTimeImmutable())
+            ->y;
+    }
+
+    protected abstract function setDesconto();
+
+    public function getDesconto(): float
+    {
+        return $this->desconto;
+    }
+
+    // SET E GET ENDERECO
+    public function setEndereco(Endereco $endereco): void
+    {
+        $this->endereco = $endereco;
+    }
+
+    public function getEndereco()
+    {
+        return $this->endereco;
+    }
+
+    public abstract function __toString(): string;     
 }

@@ -3,9 +3,16 @@
     
     use Dede\Comercial\Infraestrutura\Persistencia\CriadorConexao;
     use Dede\Comercial\Infraestrutura\Repositorio\PdoRepositorioProduto;
-    use Dede\Comercial\Dominio\Modelo\Produto;
-
+    
+    
+    use Dede\Comercial\Infraestrutura\Repositorio\PdoRepositorioCliente;
+    
+    
+    use Dede\Comercial\Dominio\Modelo\Endereco;
     use Dede\Comercial\Dominio\Modelo\Pessoa;
+    use Dede\Comercial\Dominio\Modelo\Produto;
+    use Dede\Comercial\Dominio\Modelo\Cliente;
+
     
 //$pessoa1 = new Pessoa("Edson", 10);
 //$pessoa2 = new Pessoa("Andre", 40);
@@ -31,7 +38,18 @@ echo "<pre>";
     // $reposProduto1->salvar($produto6);
     // $reposProduto1->salvar($produto7);
 
-    $reposProduto1->todosProdutos();
+    //$reposProduto1->todosProdutos();
     //var_dump($conexao);
     //var_dump($produto1);
+
+    // $reposCliente1 = new PdoRepositorioCliente(CriadorConexao::criarConexao());
+    // $endereco1 = new Endereco(
+    //     NULL,
+    //     "AP", "Macapá",
+    //     "Av. da Cidade", "100", "Centro",
+    //     "68900-000", NULL);
+
+    // $cliente1 = new Cliente(NULL, "Maria Maia", new DateTimeImmutable("1954-12-01"), $endereco1, 2000.00);
+    // $reposCliente1->salvar($cliente1);
+
 echo "</pre>";
