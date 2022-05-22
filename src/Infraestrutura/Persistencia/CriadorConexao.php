@@ -5,9 +5,8 @@ namespace Dede\Comercial\Infraestrutura\Persistencia;
 use Pdo;
 
 class CriadorConexao
-//Static para evitar que seja aberta varias instancias de banco
 {
-    public static function criarConexao(): PDO
+    public static function criarConexao(): PDO //Static para evitar que seja aberta varias instancias de banco
     {
         try {
             //Variaveis de Conexao ao banco de Dados
@@ -21,7 +20,5 @@ class CriadorConexao
         } catch (\PDOException $e) {
             echo 'ERRO ' .$e->getMessage();
         }
-
     }
-
 }
